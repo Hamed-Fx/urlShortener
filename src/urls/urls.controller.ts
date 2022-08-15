@@ -26,7 +26,7 @@ export class UrlsController {
   }
 
 
-  @Get('redirection')
+  @Post('redirection')
   async redirection(
     @Body('url') shortUrl: string,
     @Res() res: Response
@@ -43,9 +43,9 @@ export class UrlsController {
     return res.status(statusCode).json({ result, message });
   }
 
-  @Get('report')
+  @Post('report')
   async report(
-    @Body('timeFrame') timeFrame: string,
+    @Body('timeFrame') timeFrame: number,
     @Body('url') url: string,
     @Res() res: Response
   ) {
