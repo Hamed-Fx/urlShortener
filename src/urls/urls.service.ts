@@ -69,17 +69,20 @@ export class UrlsService {
         { shortUrl },
         { __v: 0, _id: 0 }
       )
-
+      if (!savedUrl) {
+        return {
+          statusCode: 401,
+          message: 'No url found!'
+        }
+      }
       const date = Date.now()
 
       const result = await this.clickModel.create({
         originalUrl: savedUrl.originalUrl,
         shortUrl: savedUrl.shortUrl,
-      },
-        { __v: 0, _id: 0 }
-      )
+      })
       return {
-        result: savedUrl,
+        result: {originalUrl: savedUrl.originalUrl},
         statusCode: 200,
         message: 'Successfully found'
       };
